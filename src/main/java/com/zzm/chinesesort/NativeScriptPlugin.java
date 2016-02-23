@@ -13,7 +13,7 @@ public class NativeScriptPlugin extends Plugin {
 	//插件名称
 	@Override
 	public String name() {
-		return "cchinese_sort";
+		return "chinese_sort";
 	}
 
 	//插件描述
@@ -22,8 +22,11 @@ public class NativeScriptPlugin extends Plugin {
 		return "a script used to change String to Pinyin";
 	}
 
-	//注册插件
-	public void onModule(ScriptModule module) {
+	/**
+	 * 注册插件
+	 * @param module script模块
+	 */
+	public void onModule(ScriptModule module){
 		module.registerScript("chinese_sort", ScriptFactory.class);
 	}
 }

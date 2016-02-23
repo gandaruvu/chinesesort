@@ -9,11 +9,11 @@ import net.sourceforge.pinyin4j.PinyinHelper;
 
 /**
  * Script工厂
+ * 
  * @author Steven
  *
  */
 public class ScriptFactory implements NativeScriptFactory {
-
 	@Override
 	public boolean needsScores() {
 		return false;
@@ -24,11 +24,20 @@ public class ScriptFactory implements NativeScriptFactory {
 		return new TransScript(params);
 	}
 
+	/**
+	 * 替换原有字符串的比较脚本
+	 * @author Steven
+	 *
+	 */
 	protected class TransScript extends AbstractSearchScript {
-		
-		//key为需要转换的字段名
+
+		// key为需要转换的字段名
 		private String key;
 
+		/**
+		 * 初始化脚本
+		 * @param params 导入key，key为需要排序的字段名
+		 */
 		public TransScript(Map<String, Object> params) {
 			this.key = (String) params.get("key");
 		}
@@ -43,7 +52,7 @@ public class ScriptFactory implements NativeScriptFactory {
 			return super.unwrap(value);
 		}
 
-		//转换方法
+		// 转换方法
 		@Override
 		public Object run() {
 			StringBuffer sb = new StringBuffer();
@@ -52,11 +61,12 @@ public class ScriptFactory implements NativeScriptFactory {
 			for (int i = 0; i < text.length(); i++) {
 				char c = text.charAt(i);
 				Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-				//判断是否为中文
+				// 判断是否为中文
 				if (Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS == ub) {
 					String[] py = PinyinHelper.toHanyuPinyinStringArray(c);
-					if (py.length > 0)
+					if (py.length > 0) {
 						sb.append(py[0]);
+					}
 				} else {
 					sb.append(c);
 				}

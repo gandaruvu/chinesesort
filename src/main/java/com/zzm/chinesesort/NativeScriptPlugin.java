@@ -9,8 +9,9 @@ import org.elasticsearch.script.ScriptModule;
  */
 
 public class NativeScriptPlugin extends Plugin {
-
-	//插件名称
+	
+	//git 测试
+	//插件名称  
 	@Override
 	public String name() {
 		return "chinese_sort";
